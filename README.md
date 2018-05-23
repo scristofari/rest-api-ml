@@ -8,7 +8,7 @@ Create a REST api which will execute some machine learning algorithms.
 - [x] Add the dependencies thanks to dep.
 - [x] Use Makefile to create some tasks.
 - [ ] After uploading the files, launch a goroutine to build / run it and get the result.
-- [ ] Save in a textfile the result of each uploaded object.
+- [ ] Store the result of each uploaded object / Create an interface to help adding X differents storage types.
 - [ ] Stream the output of the build / run tasks.
 - [ ] Mock the request / response for test purpose.
 
