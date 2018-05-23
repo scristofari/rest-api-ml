@@ -6,6 +6,7 @@ Create a REST api which will execute some machine learning algorithms.
 
 - [ ] After uploading the image or file, launch a goroutine to run it and get the result.
 - [ ] Save in a textfile the result of each uploaded object. 
+- [ ] Mock the request / response for test purpose.
 
 ## Requirements
 
@@ -43,8 +44,6 @@ This image is the docker + algo.
 ## Test and Benchmark
 
 The tests will take a long time with 1GB by image.
-
-@TODO Mock the upload and perhaps the result.
 
  ```Makefile
     make test
