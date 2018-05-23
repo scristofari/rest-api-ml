@@ -1,13 +1,16 @@
 package main
 
 import (
-	"github.com/docker/docker/client"
+	"fmt"
+	"log"
+
+	"github.com/scristofari/rest-api-ml/ml"
 )
 
 func main() {
-	cli, err := client.NewEnvClient()
+	err := ml.BuildImageFromDockerfile("./ml/fixture/archive.tar", []string{"api-ml-test"})
 	if err != nil {
-		panic(err)
+		log.Fatalf(err.Error())
 	}
-	_ = cli
+	fmt.Println("Done")
 }
