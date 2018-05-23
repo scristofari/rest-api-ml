@@ -4,6 +4,9 @@ Create a REST api which will execute some machine learning algorithms.
 
 ## Ideas
 
+- [x] Create the webserver in go with the endpoints
+- [x] Add the dependencies thanks to dep.
+- [x] Use Makefile to create some tasks.
 - [ ] After uploading the files, launch a goroutine to build / run it and get the result.
 - [ ] Save in a textfile the result of each uploaded object.
 - [ ] Stream the output of the build / run tasks.
