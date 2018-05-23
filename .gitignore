@@ -1,2 +1,5 @@
 /vendor
+/uploads
+/ml/api-rest-ml.tar
 .env
+.DS_Store
