@@ -16,8 +16,8 @@ Create a REST api which will execute some machine learning algorithms.
 - [ ] Store the result of each uploaded object / Mapping : uuid upload - type (build / run) - container id - result / Create an interface to help adding X differents storage types.
 - [ ] Stream the build / run tasks output - Event source - Log of the container
 - [ ] Pull an image from the hub, just need to run.
-- [ ] Add a absolute path for the artifact.
-- [ ] The tag of the image is the artifact's hash
+- [ ] Add a absolute path for the artifact.  
+- [ ] The tag of the image with the artifact's hash
 
 ## Requirements
 
@@ -27,7 +27,7 @@ Create a REST api which will execute some machine learning algorithms.
 
     - Gorilla Mux   => https://github.com/gorilla/mux
     - godotenv      => https://github.com/joho/godotenv
-    - docker (moby) => https://github.com/joho/godotenv
+    - docker (moby) => https://github.com/moby/moby/tree/master/client
 
 ## Installation
 
