@@ -7,8 +7,7 @@ import (
 )
 
 func main() {
-	imageName := "api-ml-test2"
-	err := docker.BuildImageFromArtifact("./ml/fixture/archive.tar", []string{imageName})
+	imageName, err := docker.BuildImageFromArtifact("./ml/fixture/archive.tar")
 	if err != nil {
 		log.Fatalf(err.Error())
 	}

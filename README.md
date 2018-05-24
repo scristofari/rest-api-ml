@@ -12,6 +12,9 @@ Create a REST api which will execute some machine learning algorithms.
 - [ ] After uploading the artifact, launch some goroutines (background) to build / run it and get the result.
 - [ ] Store the result of each uploaded object / Mapping : uuid upload - type (build / run) - container id - result / Create an interface to help adding X differents storage types.
 - [ ] Stream the build / run tasks output - Event source - Log of the container
+- [ ] Pull an image from the hub, just need to run.
+- [ ] Add a absolute path for the artifact.
+- [ ] The tag of the image is the artifact's hash
 
 ## Requirements
 

@@ -11,8 +11,11 @@ install: ## Install the project.
 run: ## Run the server.
 	@go run cmd/server/main.go
 
-test: ## Test the project.
+test: ## Test the server.
 	@cd cmd/server && go test -race -v
+
+test-cli: ## Test the cli.
+	@cd cmd/cli && go test -race -v
 
 bench: ## Benchmark of the project.
 	@cd cmd/server && go test -bench=.
