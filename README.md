@@ -2,6 +2,9 @@
 
 Create a REST api which will execute some machine learning algorithms.
 
+## WIKI:
+   [WIKI](https://github.com/scristofari/rest-api-ml/wiki)
+
 ## Ideas
 
 - [x] Create the webserver in go with the endpoints
