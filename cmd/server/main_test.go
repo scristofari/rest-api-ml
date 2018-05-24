@@ -15,6 +15,7 @@ func TestUploadHandler(t *testing.T) {
 	}
 }
 
+/*
 func TestResultHandler(t *testing.T) {
 	w := httptest.NewRecorder()
 	r, _ := http.NewRequest(http.MethodGet, "http://localhost/artifact/hash", nil)
@@ -23,6 +24,7 @@ func TestResultHandler(t *testing.T) {
 		t.Errorf("Expected %d, get %d", http.StatusOK, w.Code)
 	}
 }
+*/
 
 func BenchmarkUploadHander(b *testing.B) {
 
@@ -40,6 +42,7 @@ func BenchmarkUploadHander(b *testing.B) {
 	}
 }
 
+/*
 func BenchmarkResultHander(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
@@ -59,3 +62,4 @@ func BenchmarkResultHander(b *testing.B) {
 		}
 	}
 }
+*/

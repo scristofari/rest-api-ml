@@ -32,6 +32,7 @@ func handlers() *mux.Router {
 
 func uploadHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
+	// @TODO Call the function in background, with a goroutine.
 	// s, err := ml.LaunchArtifact("./ml/fixture/archive.tar")
 	// if err != nil {
 	//  	http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -41,9 +42,11 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func artifactHandler(w http.ResponseWriter, r *http.Request) {
+	// Call GetArtifactInfo from the ml package
 	http.Error(w, "Not Implemented !", http.StatusInternalServerError)
 }
 
 func logHandler(w http.ResponseWriter, r *http.Request) {
+	// Call GetArtifactLogs from the ml package
 	http.Error(w, "Not Implemented !", http.StatusInternalServerError)
 }

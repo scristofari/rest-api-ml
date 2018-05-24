@@ -32,6 +32,7 @@ type ArtifactInfo struct {
 }
 
 // LaunchArtifact will build and run the project.
+// @TODO Store each event -> interface Storage
 func LaunchArtifact(artifactPath string) error {
 	imageName, err := docker.BuildImageFromArtifact(artifactPath)
 	if err != nil {
@@ -41,7 +42,8 @@ func LaunchArtifact(artifactPath string) error {
 	if err != nil {
 		return fmt.Errorf("could not run the image %v", err)
 	}
-
+	_ = containerID
+	return nil
 }
 
 // GetArtifactInfo will retrieve info on the launch's progress
