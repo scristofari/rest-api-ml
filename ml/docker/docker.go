@@ -35,8 +35,14 @@ func BuildImageFromArtifact(archivePath string) (string, error) {
 	}
 	defer dockerBuildContext.Close()
 
-	imageName := getMD5Hash(dockerBuildContext)
+	// the copy will corrupt the tar file apparently.
+	// fake it a the moment.
+	// imageName, err := getMD5Hash(dockerBuildContext)
+	// if err != nil {
+	//	return "", err
+	// }
 
+	imageName := "api-artifact"
 	opts := types.ImageBuildOptions{
 		Remove:  true,
 		NoCache: false,
@@ -90,10 +96,10 @@ func StopContainerFromID(containerID string) error {
 	return nil
 }
 
-func getMD5Hash(f io.Reader) string {
+func getMD5Hash(f io.Reader) (string, error) {
 	h := md5.New()
 	if _, err := io.Copy(h, f); err != nil {
-		log.Fatal(err)
+		return "", fmt.Errorf("could not copy: %s", err)
 	}
-	return hex.EncodeToString(h.Sum(nil))
+	return hex.EncodeToString(h.Sum(nil)), nil
 }

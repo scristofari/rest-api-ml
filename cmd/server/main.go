@@ -31,9 +31,14 @@ func handlers() *mux.Router {
 
 func uploadHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
-	//fmt.Println("Upload Handler")
+	// s, err := ml.LaunchArtifact("./ml/fixture/archive.tar")
+	// if err != nil {
+	//  	http.Error(w, err.Error(), http.StatusInternalServerError)
+	// }
+	// enc := json.NewEncoder(w)
+	// enc.Encode(s)
 }
 
 func resultHandler(w http.ResponseWriter, r *http.Request) {
-	//fmt.Println("Result Handler")
+	// fmt.Println("Result Handler")
 }
