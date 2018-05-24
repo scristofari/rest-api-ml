@@ -15,6 +15,8 @@ import (
 	"github.com/docker/docker/client"
 )
 
+// @TODO Must be compliant with the Runner interface
+
 var cli *client.Client
 
 func init() {
@@ -78,7 +80,7 @@ func GetStateFromContainerID(containerID string) (*types.ContainerState, error) 
 	ctx := context.Background()
 	info, err := cli.ContainerInspect(ctx, containerID)
 	if err != nil {
-		return nil, fmt.Errorf("could not retreive info: %v", err)
+		return nil, fmt.Errorf("could not retrieve info: %v", err)
 	}
 
 	return info.State, nil

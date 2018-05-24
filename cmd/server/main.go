@@ -25,7 +25,8 @@ func main() {
 func handlers() *mux.Router {
 	r := mux.NewRouter().StrictSlash(true)
 	r.HandleFunc("/upload", uploadHandler).Methods("POST")
-	r.HandleFunc("/result", resultHandler).Methods("GET")
+	r.HandleFunc("/artifact/{uuid}", artifactHandler).Methods("GET")
+	r.HandleFunc("/artifact/{uuid}/logs/{event}", logHandler).Methods("GET")
 	return r
 }
 
@@ -39,6 +40,10 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 	// enc.Encode(s)
 }
 
-func resultHandler(w http.ResponseWriter, r *http.Request) {
-	// fmt.Println("Result Handler")
+func artifactHandler(w http.ResponseWriter, r *http.Request) {
+	http.Error(w, "Not Implemented !", http.StatusInternalServerError)
+}
+
+func logHandler(w http.ResponseWriter, r *http.Request) {
+	http.Error(w, "Not Implemented !", http.StatusInternalServerError)
 }
