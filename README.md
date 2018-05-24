@@ -54,8 +54,6 @@ This image is the docker + algo.
 
 ## Test and Benchmark
 
-The tests will take a long time with 1GB by image.
-
  ```Makefile
     make test
     make bench
