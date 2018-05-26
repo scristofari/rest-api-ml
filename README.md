@@ -18,8 +18,10 @@ Create a REST api which will execute some machine learning algorithms.
 - [ ] Pull an image from the hub, just need to run.
 - [ ] Add a absolute path for the artifact.  
 - [ ] The image's tag is the artifact's hash
-- [ ] Grpc / Protobuffer
+- [ ] Grpc / Protobuffer / Grpc Http
+- [ ] Endpoint with a version, ex: /v1/upload, /v1/aritifact/uuid
 - [ ] Algo: Do not create a json file, ouptut the result in the standart output - No need to mount or copy the file.
+
 
 ## Requirements
 
