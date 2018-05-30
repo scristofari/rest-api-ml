@@ -15,19 +15,6 @@ import (
 	"github.com/docker/docker/client"
 )
 
-// @TODO Must be compliant with the Runner interface
-
-var cli *client.Client
-
-func init() {
-	// @TODO Refactor, do not let the connection open, defer close it.
-	var err error
-	cli, err = client.NewEnvClient()
-	if err != nil {
-		log.Fatalf("could not connect to the docker environnement: %v", err)
-	}
-}
-
 // BuildImageFromArtifact build the image thanks to the Dockerfile
 // given when the request is submitted.
 func BuildImageFromArtifact(archivePath string) (string, error) {
@@ -50,6 +37,9 @@ func BuildImageFromArtifact(archivePath string) (string, error) {
 		NoCache: false,
 		Tags:    []string{imageName},
 	}
+
+	cli := getClient()
+	defer cli.Close()
 	if _, err = cli.ImageBuild(context.Background(), dockerBuildContext, opts); err != nil {
 		return "", fmt.Errorf("could not build the image: %s", err)
 	}
@@ -59,16 +49,16 @@ func BuildImageFromArtifact(archivePath string) (string, error) {
 
 // RunImage run the image and get the result.
 func RunImage(imageName string) (string, error) {
-	ctx := context.Background()
-	resp, err := cli.ContainerCreate(ctx, &container.Config{
+	cli := getClient()
+	defer cli.Close()
+	resp, err := cli.ContainerCreate(context.Background(), &container.Config{
 		Image: imageName,
 		Tty:   true,
 	}, nil, nil, "")
 	if err != nil {
 		return "", fmt.Errorf("could not create the container: %v", err)
 	}
-
-	if err := cli.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{}); err != nil {
+	if err := cli.ContainerStart(context.Background(), resp.ID, types.ContainerStartOptions{}); err != nil {
 		return "", fmt.Errorf("could not start the container: %v", err)
 	}
 
@@ -77,8 +67,9 @@ func RunImage(imageName string) (string, error) {
 
 // GetStateFromContainerID returns the status of the container.
 func GetStateFromContainerID(containerID string) (*types.ContainerState, error) {
-	ctx := context.Background()
-	info, err := cli.ContainerInspect(ctx, containerID)
+	cli := getClient()
+	defer cli.Close()
+	info, err := cli.ContainerInspect(context.Background(), containerID)
 	if err != nil {
 		return nil, fmt.Errorf("could not retrieve info: %v", err)
 	}
@@ -88,14 +79,34 @@ func GetStateFromContainerID(containerID string) (*types.ContainerState, error) 
 
 // StopContainerFromID stop the container if running.
 func StopContainerFromID(containerID string) error {
-	ctx := context.Background()
+	cli := getClient()
+	defer cli.Close()
 	timeout := time.Second * 2
-	err := cli.ContainerStop(ctx, containerID, &timeout)
+	err := cli.ContainerStop(context.Background(), containerID, &timeout)
 	if err != nil {
 		return fmt.Errorf("could not retreive info: %v", err)
 	}
 
 	return nil
+}
+
+// LogsFromContainerID get the container's STDOUT.
+func LogsFromContainerID(containerID string) (io.ReadCloser, error) {
+	cli := getClient()
+	defer cli.Close()
+	return cli.ContainerLogs(context.Background(), containerID, types.ContainerLogsOptions{
+		ShowStdout: true,
+		Timestamps: false,
+	})
+}
+
+func getClient() *client.Client {
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		log.Fatalf("could not connect to the docker environnement: %v", err)
+	}
+
+	return cli
 }
 
 func getMD5Hash(f io.Reader) (string, error) {

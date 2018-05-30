@@ -28,3 +28,6 @@ start-ml: ## Run the docker image
 
 save: ## Save the docker image in a tar file
 	@cd ml/fixture/ && docker save --output=api-rest-ml.tar api-rest-ml
+
+protoc: ## Generate protobuffer
+	@cd cmd/grpc/ && protoc *.proto --go_out=plugins=grpc:.
