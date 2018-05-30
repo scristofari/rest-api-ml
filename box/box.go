@@ -1,11 +1,11 @@
-package ml
+package box
 
 import (
 	"fmt"
 	"io"
 
 	"github.com/docker/docker/api/types"
-	"github.com/scristofari/rest-api-ml/ml/docker"
+	"github.com/scristofari/rest-api-ml/box/runner"
 )
 
 type Runner interface {
@@ -16,29 +16,19 @@ type Runner interface {
 }
 
 type Storage interface {
-	AddNewArtifact(artifact *ArtifactInfo) error
+	AddNewArtifact(artifact *Artifact) error
 	AddNewEventForArtifact(event map[string]interface{}, uuid int64) error
-	GetArtifactInfoFromUUID(uuid int64) (*ArtifactInfo, error)
-}
-
-type ArtifactInfo struct {
-	UUID   int64                  `json:"uuid"`   // @TODO lib UUID
-	Status string                 `json:"status"` // @TODO Enum or {event}_{status} default 'pending'
-	Events map[string]interface{} `json:"events"` // @TODO map case with the proper field
-	Result struct {
-		TestLoss     float64 `json:"test_loss"`
-		TestAccuracy float64 `json:"test_accuracy"`
-	} `json:"result"`
+	GetArtifactInfoFromUUID(uuid int64) (*Artifact, error)
 }
 
 // LaunchArtifact will build and run the project.
 // @TODO Store each event -> interface Storage
 func LaunchArtifact(artifactPath string) error {
-	imageName, err := docker.BuildImageFromArtifact(artifactPath)
+	imageName, err := runner.BuildImageFromArtifact(artifactPath)
 	if err != nil {
 		return fmt.Errorf("could not build the image %v", err)
 	}
-	containerID, err := docker.RunImage(imageName)
+	containerID, err := runner.RunImage(imageName)
 	if err != nil {
 		return fmt.Errorf("could not run the image %v", err)
 	}
@@ -47,7 +37,7 @@ func LaunchArtifact(artifactPath string) error {
 }
 
 // GetArtifactInfo will retrieve info on the launch's progress
-func GetArtifactInfo(uuid int64) (*ArtifactInfo, error) {
+func GetArtifactInfo(uuid int64) (*Artifact, error) {
 	return nil, fmt.Errorf("Not implemented")
 }
 
