@@ -5,6 +5,17 @@ package box;
 message Artifact {
     string uuid = 1;
     string status = 2;
+    repeated Task tasks = 3;
+    Result result = 4;
+}
+
+message Task {
+    string status = 1;
+}
+
+message Result {
+    double test_loss = 1;
+    double test_accuracy = 2;
 }
 
 message ArtifactRequest {
