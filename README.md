@@ -1,3 +1,8 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/scristofari/rest-api-ml)](https://goreportcard.com/report/github.com/scristofari/rest-api-ml)
+
+
+
+
 # WIP - rest-api-ml
 
 Create a REST api which will execute some machine learning algorithms.
