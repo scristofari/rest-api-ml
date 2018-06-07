@@ -1,6 +1,9 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/scristofari/rest-api-ml)](https://goreportcard.com/report/github.com/scristofari/rest-api-ml)
 
 
+Rest api ml
+[![GoDoc](https://godoc.org/github.com/scristofari/rest-api-ml/box?status.svg)](https://godoc.org/github.com/scristofari/rest-api-ml/box)
+
 
 
 # WIP - rest-api-ml
